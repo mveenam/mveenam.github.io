@@ -143,6 +143,7 @@
       <dt>What I built</dt><dd>An agent that reads a job posting, searches my CV and work stories through an MCP server (local embeddings in Postgres with pgvector), rates each requirement strong, partial or gap, and drafts tailored CV bullets. Every claim must cite a passage the agent actually retrieved; code downgrades anything that doesn't, and the match score is calculated from the ratings rather than picked by the model.</dd>
       <dt>How I test it</dt><dd>A retrieval check (10/10), then an evaluation suite on 7 live postings. A second model checks every claim against its cited passages, and it first has to catch a set of deliberately fabricated claims (5/5).</dd>
       <dt>Result</dt><dd class="result">All 141 claims backed by their citations, no invented bullets, 7 of 7 clean runs, about $0.31 per posting.</dd>
+      <dt>What I learned</dt><dd>Don't let the model grade itself. Calculating the score in code instead of asking the model for one moved its scores much closer to mine (45% / 66% became 61% / 76%, against my 55% / 85%). Testing the judge before trusting it mattered as much as testing the agent. And small retrieval changes (how text is split, which embedding model) took the evidence check from 7/10 to 10/10.</dd>
       <dt>Still open</dt><dd>13% of ratings were more generous than the evidence. Next I'm measuring how closely the agent's ratings match my own.</dd>
     </dl>
   </article>
